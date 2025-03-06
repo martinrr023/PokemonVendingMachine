@@ -125,19 +125,25 @@
 
             locations.forEach((location) => {
                 const marker = new google.maps.Marker({
-                    position: { lat: location.lat, lng: location.lng },
-                    map: map,
-                    title: location.retailer
-                });
-
-                const infoWindow = new google.maps.InfoWindow({
-                    content: `<strong>${location.retailer}</strong><br>Machine ID: ${location.id}<br>${location.address}`
-                });
-
-                marker.addListener("click", () => {
-                    infoWindow.open(map, marker);
-                });
+                position: { lat: location.lat, lng: location.lng },
+                map: map,
+                title: location.retailer
             });
+
+            const infoWindow = new google.maps.InfoWindow({
+                content: `<strong>${location.retailer}</strong><br>
+                  Machine ID: ${location.id}<br>
+                  ${location.address}<br>
+                  <a href="https://www.google.com/maps/dir/?api=1&destination=${location.lat},${location.lng}" 
+                     target="_blank" style="color: blue; text-decoration: underline;">
+                      📍 Get Directions
+                  </a>`
+            });
+
+             marker.addListener("click", () => {
+                infoWindow.open(map, marker);
+         });
+});
         }
     </script>
     <style>
