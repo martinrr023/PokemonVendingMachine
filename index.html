@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Pokémon Vending Machine Locations in Texas</title>
   <style>
     #map {
       height: 90vh;
       width: 100%;
+    }
+
+    #zoom-controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: white;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      z-index: 5;
+    }
+
+    #zoom-controls button {
+      margin: 5px;
+      padding: 5px 10px;
+      font-size: 16px;
     }
   </style>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4dE-q_PwOeySJOpee-cYXkfi3ewuD6i0&callback=initMap" async defer></script>
@@ -179,47 +196,34 @@
         });
       });
     }
+
     function zoomIn() {
-    map.setZoom(map.getZoom() + 1);
-  }
+      if (map) map.setZoom(map.getZoom() + 1);
+    }
 
-  function zoomOut() {
-    map.setZoom(map.getZoom() - 1);
-  }
-</script>
-  <style>
-    #zoom-controls {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background-color: white;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    function zoomOut() {
+      if (map) map.setZoom(map.getZoom() - 1);
     }
-    #zoom-controls button {
-      margin: 5px;
-    }
-  </style>
+  </script>
 </head>
-
 <body>
   <h1 style="text-align: center;">Pokémon Vending Machine Locations in Texas</h1>
-  
 
-  <!-- Pokémon images added here -->
+  <!-- Pokémon Images -->
   <div style="text-align: center; margin-bottom: 10px;">
     <img src="https://img.pokemondb.net/artwork/pikachu.jpg" alt="Pikachu" height="50">
     <img src="https://img.pokemondb.net/artwork/charizard.jpg" alt="Charizard" height="50">
     <img src="https://img.pokemondb.net/artwork/bulbasaur.jpg" alt="Bulbasaur" height="50">
     <img src="https://img.pokemondb.net/artwork/squirtle.jpg" alt="Squirtle" height="50">
   </div>
-  
+
+  <!-- Zoom Controls -->
   <div id="zoom-controls">
     <button onclick="zoomIn()">+</button>
     <button onclick="zoomOut()">−</button>
   </div>
-  
+
+  <!-- Map Display -->
   <div id="map"></div>
 </body>
 </html>
