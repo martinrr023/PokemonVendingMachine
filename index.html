@@ -167,15 +167,17 @@
                         const userLocation = {
                             lat: position.coords.latitude,
                             lng: position.coords.longitude
-                        };
-                        new google.maps.Marker({
-                            position: userLocation,
-                            map: map,
-                            title: "You are here",
-                            icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-                        });
-                        map.setCenter(userLocation);
-                        map.setZoom(11);
+                         };
+                        const marker = new google.maps.Marker({
+                        position: { lat: location.lat, lng: location.lng },
+                         map: map,
+                        title: location.retailer,
+                        icon: {
+                        url: "https://freebiesupply.com/logos/pokemon-logo-23/",
+                        scaledSize: new google.maps.Size(32, 32) // Adjust the size as needed
+  }
+});
+
                     },
                     () => console.warn("Geolocation permission denied.")
                 );
