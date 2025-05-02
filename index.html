@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Pokémon Vending Machine Locations in Texas</title>
   <style>
     #map {
@@ -10,33 +10,50 @@
     }
 
     #zoom-controls {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background-color: white;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-      z-index: 5;
+      text-align: center;
+      margin-bottom: 10px;
     }
 
     #zoom-controls button {
-      margin: 5px;
-      padding: 5px 10px;
-      font-size: 16px;
+      font-size: 20px;
+      margin: 0 10px;
+      padding: 5px 15px;
+      cursor: pointer;
     }
   </style>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4dE-q_PwOeySJOpee-cYXkfi3ewuD6i0&callback=initMap" async defer></script>
+</head>
+<body>
+  <h1 style="text-align: center;">Pokémon Vending Machine Locations in Texas</h1>
+
+  <!-- Pokémon images -->
+  <div style="text-align: center; margin-bottom: 10px;">
+    <img src="https://img.pokemondb.net/artwork/pikachu.jpg" alt="Pikachu" height="50">
+    <img src="https://img.pokemondb.net/artwork/charizard.jpg" alt="Charizard" height="50">
+    <img src="https://img.pokemondb.net/artwork/bulbasaur.jpg" alt="Bulbasaur" height="50">
+    <img src="https://img.pokemondb.net/artwork/squirtle.jpg" alt="Squirtle" height="50">
+  </div>
+
+  <!-- Zoom buttons -->
+  <div id="zoom-controls">
+    <button onclick="zoomIn()">+</button>
+    <button onclick="zoomOut()">−</button>
+  </div>
+
+  <div id="map"></div>
+
+  <!-- Google Maps and script -->
   <script>
     let map;
+
     function initMap() {
-      const map = new google.maps.Map(document.getElementById("map"), {
+      map = new google.maps.Map(document.getElementById("map"), {
         zoom: 8,
         center: { lat: 29.7604, lng: -95.3698 },
         mapTypeControl: true,
         streetViewControl: false,
         fullscreenControl: true
       });
+
 
       const locations = [
         { retailer: "Tom Thumb", id: "Q00912", address: "14280 Marsh Ln, Addison, Tx", lat: 32.938485, lng: -96.853651 },
@@ -198,32 +215,13 @@
     }
 
     function zoomIn() {
-      if (map) map.setZoom(map.getZoom() + 1);
+      map.setZoom(map.getZoom() + 1);
     }
 
     function zoomOut() {
-      if (map) map.setZoom(map.getZoom() - 1);
+      map.setZoom(map.getZoom() - 1);
     }
   </script>
-</head>
-<body>
-  <h1 style="text-align: center;">Pokémon Vending Machine Locations in Texas</h1>
-
-  <!-- Pokémon Images -->
-  <div style="text-align: center; margin-bottom: 10px;">
-    <img src="https://img.pokemondb.net/artwork/pikachu.jpg" alt="Pikachu" height="50">
-    <img src="https://img.pokemondb.net/artwork/charizard.jpg" alt="Charizard" height="50">
-    <img src="https://img.pokemondb.net/artwork/bulbasaur.jpg" alt="Bulbasaur" height="50">
-    <img src="https://img.pokemondb.net/artwork/squirtle.jpg" alt="Squirtle" height="50">
-  </div>
-
-  <!-- Zoom Controls -->
-  <div id="zoom-controls">
-    <button onclick="zoomIn()">+</button>
-    <button onclick="zoomOut()">−</button>
-  </div>
-
-  <!-- Map Display -->
-  <div id="map"></div>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4dE-q_PwOeySJOpee-cYXkfi3ewuD6i0&callback=initMap" async defer></script>
 </body>
 </html>
