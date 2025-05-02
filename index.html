@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Pokémon Vending Machine Locations in Texas</title>
   <style>
     #map {
@@ -10,38 +10,34 @@
     }
 
     #zoom-controls {
-      text-align: center;
-      margin-bottom: 10px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: white;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      z-index: 5;
     }
 
     #zoom-controls button {
-      font-size: 20px;
-      margin: 0 10px;
-      padding: 5px 15px;
-      cursor: pointer;
+      margin: 5px;
+      padding: 5px 10px;
+      font-size: 16px;
+    }
+
+    #location-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: white;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      z-index: 5;
     }
   </style>
-</head>
-<body>
-  <h1 style="text-align: center;">Pokémon Vending Machine Locations in Texas</h1>
-
-  <!-- Pokémon images -->
-  <div style="text-align: center; margin-bottom: 10px;">
-    <img src="https://img.pokemondb.net/artwork/pikachu.jpg" alt="Pikachu" height="50">
-    <img src="https://img.pokemondb.net/artwork/charizard.jpg" alt="Charizard" height="50">
-    <img src="https://img.pokemondb.net/artwork/bulbasaur.jpg" alt="Bulbasaur" height="50">
-    <img src="https://img.pokemondb.net/artwork/squirtle.jpg" alt="Squirtle" height="50">
-  </div>
-
-  <!-- Zoom buttons -->
-  <div id="zoom-controls">
-    <button onclick="zoomIn()">+</button>
-    <button onclick="zoomOut()">−</button>
-  </div>
-
-  <div id="map"></div>
-
-  <!-- Google Maps and script -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4dE-q_PwOeySJOpee-cYXkfi3ewuD6i0&callback=initMap" async defer></script>
   <script>
     let map;
 
@@ -193,6 +189,7 @@
 { retailer: "Kroger", id: "Q00548", address: "12605 Interstate 45 N, Willis, Tx", lat: 30.422313, lng: -95.494687 }
       ];
 
+ 
       locations.forEach(location => {
         const marker = new google.maps.Marker({
           position: { lat: location.lat, lng: location.lng },
@@ -215,13 +212,63 @@
     }
 
     function zoomIn() {
-      map.setZoom(map.getZoom() + 1);
+      if (map) map.setZoom(map.getZoom() + 1);
     }
 
     function zoomOut() {
-      map.setZoom(map.getZoom() - 1);
+      if (map) map.setZoom(map.getZoom() - 1);
+    }
+
+    function goToMyLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          position => {
+            const userPos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            map.setCenter(userPos);
+            map.setZoom(12);
+
+            new google.maps.Marker({
+              position: userPos,
+              map: map,
+              icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+              title: "You are here!"
+            });
+          },
+          () => alert("Geolocation permission denied.")
+        );
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
     }
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4dE-q_PwOeySJOpee-cYXkfi3ewuD6i0&callback=initMap" async defer></script>
+</head>
+<body>
+  <h1 style="text-align: center;">Pokémon Vending Machine Locations in Texas</h1>
+
+  <!-- Pokémon Images -->
+  <div style="text-align: center; margin-bottom: 10px;">
+    <img src="https://img.pokemondb.net/artwork/pikachu.jpg" alt="Pikachu" height="50">
+    <img src="https://img.pokemondb.net/artwork/charizard.jpg" alt="Charizard" height="50">
+    <img src="https://img.pokemondb.net/artwork/bulbasaur.jpg" alt="Bulbasaur" height="50">
+    <img src="https://img.pokemondb.net/artwork/squirtle.jpg" alt="Squirtle" height="50">
+  </div>
+
+  <!-- Zoom Controls -->
+  <div id="zoom-controls">
+    <button onclick="zoomIn()">+</button>
+    <button onclick="zoomOut()">−</button>
+  </div>
+
+  <!-- My Location Button -->
+  <div id="location-button">
+    <button onclick="goToMyLocation()">📍 My Location</button>
+  </div>
+
+  <!-- Map Container -->
+  <div id="map"></div>
 </body>
 </html>
