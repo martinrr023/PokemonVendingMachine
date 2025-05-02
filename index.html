@@ -11,14 +11,70 @@
   </style>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4dE-q_PwOeySJOpee-cYXkfi3ewuD6i0&callback=initMap" async defer></script>
   <script>
-    function initMap() {
-      const map = new google.maps.Map(document.getElementById("map"), {
+function initMap() {
+    const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 8,
-        center: { lat: 29.7604, lng: -95.3698 },
-        mapTypeControl: true,
-        streetViewControl: false,
-        fullscreenControl: true
-      });
+        center: { lat: 29.749907, lng: -95.358421 } // Centering on Texas
+    });
+
+    // ✅ Add this HERE to get and show the user's current location
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                const userMarker = new google.maps.Marker({
+                    position: userLocation,
+                    map: map,
+                    title: "You are here",
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 7,
+                        fillColor: "#4285F4",
+                        fillOpacity: 1,
+                        strokeWeight: 2,
+                        strokeColor: "white"
+                    }
+                });
+
+                // Optional: Center the map on user's location
+                map.setCenter(userLocation);
+            },
+            () => {
+                console.warn("Geolocation failed or permission denied.");
+            }
+        );
+    } else {
+        console.warn("Browser doesn't support Geolocation.");
+    }
+
+    // ✅ Your marker creation loop continues here...
+    locations.forEach((location) => {
+        const marker = new google.maps.Marker({
+            position: { lat: location.lat, lng: location.lng },
+            map: map,
+            title: location.retailer
+        });
+
+        const infoWindow = new google.maps.InfoWindow({
+            content: `<strong>${location.retailer}</strong><br>
+                      Machine ID: ${location.id}<br>
+                      ${location.address}<br>
+                      <a href="https://www.google.com/maps/dir/?api=1&destination=${location.lat},${location.lng}" 
+                         target="_blank" style="color: blue; text-decoration: underline;">
+                          📍 Get Directions
+                      </a>`
+        });
+
+        marker.addListener("click", () => {
+            infoWindow.open(map, marker);
+        });
+    });
+}
+
 
       const locations = [
         { retailer: "Tom Thumb", id: "Q00912", address: "14280 Marsh Ln, Addison, Tx", lat: 32.938485, lng: -96.853651 },
