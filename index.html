@@ -11,7 +11,7 @@
 
 #zoom-controls {
   position: absolute;
-  top: 10px;
+  top: 50px;
   left: 10px;
   background-color: white;
   padding: 10px;
@@ -37,6 +37,10 @@
 }
 
 #my-location-button {
+  position: absolute;
+  top: 20px;
+  left: 1300px;
+  z-index: 5;
   padding: 16px 24px;
   font-size: 20px;
   font-weight: bold;
@@ -49,6 +53,7 @@
 #my-location-button:hover {
   background-color: #2a38a0;
 }
+
   </style>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4dE-q_PwOeySJOpee-cYXkfi3ewuD6i0&callback=initMap" async defer></script>
   <script>
@@ -280,11 +285,6 @@
   <div id="zoom-controls">
     <button onclick="zoomIn()">+</button>
     <button onclick="zoomOut()">−</button>
-  </div>
-
-  <!-- My Location Button -->
-  <div id="location-button">
-    <button onclick="goToMyLocation()">📍 My Location</button>
   </div>
 
   <!-- Map Container -->
