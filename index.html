@@ -1,187 +1,200 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Pokémon Vending Machine Locations in Texas</title>
-  <style>
-    #map {
-      height: 90vh;
-      width: 100%;
-    }
-  </style>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4dE-q_PwOeySJOpee-cYXkfi3ewuD6i0&callback=initMap" async defer></script>
-  <script>
-    function initMap() {
-      const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 8,
-        center: { lat: 29.7604, lng: -95.3698 },
-        mapTypeControl: true,
-        streetViewControl: false,
-        fullscreenControl: true
-      });
-
-      const locations = [
-        { retailer: "Tom Thumb", id: "Q00912", address: "14280 Marsh Ln, Addison, Tx", lat: 32.938485, lng: -96.853651 },
-{ retailer: "Kroger", id: "Q00950", address: "3770 Belt Line Rd, Addison, Tx", lat: 32.952024, lng: -96.852339 },
-{ retailer: "Kroger", id: "Q00903", address: "1212 E Bethany Dr, Allen, Tx", lat: 33.083529, lng: -96.64441 },
-{ retailer: "Kroger", id: "Q00911", address: "1210 N Greenville Ave, Allen, Tx", lat: 33.116056, lng: -96.650574 },
-{ retailer: "Kroger", id: "Q00297", address: "3100 S Gordon St, Alvin, Tx", lat: 29.398478, lng: -95.24898 },
-{ retailer: "Tom Thumb", id: "Q00906", address: "2755 N Collins St, Arlington, Tx", lat: 32.78415, lng: -97.094892 },
-{ retailer: "Albertsons", id: "Q00908", address: "480 Northwest Pkwy, Azle, Tx", lat: 32.902011, lng: -97.544408 },
-{ retailer: "Kroger", id: "Q00771", address: "1700 N Alexander Dr, Baytown, Tx", lat: 29.740173, lng: -94.952331 },
-{ retailer: "H-E-B", id: "Q00541", address: "5106 Bissonnet St, Bellaire, Tx", lat: 29.70758, lng: -95.469048 },
-{ retailer: "Albertsons", id: "Q00960", address: "833 Ne Alsbury Blvd, Burleson, Tx", lat: 32.564632, lng: -97.321899 },
-{ retailer: "WinCo Foods", id: "Q00477", address: "2620 N. Josey Lane, Carrollton, Tx", lat: 32.98686, lng: -96.889525 },
-{ retailer: "Albertsons", id: "Q00914", address: "2150 N Josey Ln, Carrollton, Tx", lat: 32.974802, lng: -96.888337 },
-{ retailer: "Kroger", id: "Q00376", address: "2222 Interstate 45 N, Conroe, Tx", lat: 30.336151, lng: -95.477058 },
-{ retailer: "Kroger", id: "Q00408", address: "341 S Loop 336 W, Conroe, Tx", lat: 30.276486, lng: -95.464877 },
-{ retailer: "Tom Thumb", id: "Q00915", address: "106 N Denton Tap Rd, Coppell, Tx", lat: 32.971181, lng: -96.992422 },
-{ retailer: "Albertsons", id: "Q00953", address: "4351 Fm 2181, Corinth, Tx", lat: 33.131131, lng: -97.043412 },
-{ retailer: "H-E-B", id: "Q00522", address: "14100 Spring Cypress Rd, Cypress, Tx", lat: 30.003158, lng: -95.637149 },
-{ retailer: "H-E-B", id: "Q00524", address: "9722 Fry Rd, Cypress, Tx", lat: 29.928932, lng: -95.726769 },
-{ retailer: "H-E-B", id: "Q00530", address: "24224 Northwest Fwy, Cypress, Tx", lat: 29.95749, lng: -95.673224 },
-{ retailer: "Kroger", id: "Q00557", address: "9703 Barker Cypress Rd, Cypress, Tx", lat: 29.918995, lng: -95.688652 },
-{ retailer: "Kroger", id: "Q00558", address: "17455 Spring Cypress Rd, Cypress, Tx", lat: 29.971353, lng: -95.690792 },
-{ retailer: "Kroger", id: "Q00777", address: "20355 Cypresswood Dr, Cypress, Tx", lat: 29.98808, lng: -95.731519 },
-{ retailer: "Tom Thumb", id: "Q00531", address: "4625 Frankford Rd, Dallas, Tx", lat: 32.99917, lng: -96.827129 },
-{ retailer: "Tom Thumb", id: "Q00901", address: "3757 Forest Ln, Dallas, Tx", lat: 32.910924, lng: -96.853033 },
-{ retailer: "Tom Thumb", id: "Q00902", address: "5809 E Lovers Ln, Dallas, Tx", lat: 32.852206, lng: -96.767169 },
-{ retailer: "Kroger", id: "Q00964", address: "17194 Preston Rd, Dallas, Tx", lat: 32.983901, lng: -96.802202 },
-{ retailer: "Kroger", id: "Q00965", address: "1592 S Loop 288, Denton, Tx", lat: 33.194008, lng: -97.095134 },
-{ retailer: "Tom Thumb", id: "Q00896", address: "633 W Wheatland Rd, Duncanville, Tx", lat: 32.648449, lng: -96.923408 },
-{ retailer: "Tom Thumb", id: "Q00484", address: "745 Cross Timbers Rd, Flower Mound, Tx", lat: 33.041519, lng: -97.039155 },
-{ retailer: "Kroger", id: "Q00910", address: "1101 Flower Mound Rd, Flower Mound, Tx", lat: 33.009917, lng: -97.046672 },
-{ retailer: "Kroger", id: "Q00956", address: "2709 Cross Timbers Rd, Flower Mound, Tx", lat: 33.035163, lng: -97.071916 },
-{ retailer: "Albertsons", id: "Q00452", address: "9300 Clifford St, Fort Worth, Tx", lat: 32.766846, lng: -97.478814 },
-{ retailer: "WinCo Foods", id: "Q00461", address: "8000 Crowley Rd, Fort Worth, Tx", lat: 32.632876, lng: -97.349629 },
-{ retailer: "Tom Thumb", id: "Q00895", address: "3100 S Hulen St, Fort Worth, Tx", lat: 32.704965, lng: -97.389386 },
-{ retailer: "Albertsons", id: "Q00907", address: "850 E Loop 820, Fort Worth, Tx", lat: 32.767425, lng: -97.214585 },
-{ retailer: "Kroger", id: "Q00948", address: "5241 N Tarrant Pkwy, Fort Worth, Tx", lat: 32.89592, lng: -97.270332 },
-{ retailer: "Kroger", id: "Q00958", address: "1653 Basswood Blvd, Fort Worth, Tx", lat: 32.872188, lng: -97.339485 },
-{ retailer: "Kroger", id: "Q00546", address: "151 N Friendswood Dr, Friendswood, Tx", lat: 29.535493, lng: -95.205967 },
-{ retailer: "Kroger", id: "Q00554", address: "5730 Seawall Blvd, Galveston, Tx", lat: 29.26873, lng: -94.822865 },
-{ retailer: "WinCo Foods", id: "Q00528", address: "1122 W Centerville Rd, Garland, Tx", lat: 32.855114, lng: -96.644251 },
-{ retailer: "Kroger", id: "Q00917", address: "532 W Interstate 30, Garland, Tx", lat: 32.83783, lng: -96.59692 },
-{ retailer: "Tom Thumb", id: "Q00897", address: "4215 S Carrier Pkwy, Grand Prairie, Tx", lat: 32.670984, lng: -97.00463 },
-{ retailer: "Kroger", id: "Q00294", address: "10306 S Post Oak Rd, Houston, Tx", lat: 29.669378, lng: -95.463639 },
-{ retailer: "Kroger", id: "Q00298", address: "12434 State Highway 249, Houston, Tx", lat: 29.91221, lng: -95.477897 },
-{ retailer: "Kroger", id: "Q00299", address: "9919 Westheimer Rd, Houston, Tx", lat: 29.736457, lng: -95.544677 },
-{ retailer: "Kroger", id: "Q00300", address: "16400 El Camino Real, Houston, Tx", lat: 29.558554, lng: -95.124676 },
-{ retailer: "Kroger", id: "Q00302", address: "11701 E Sam Houston Pkwy S, Houston, Tx", lat: 29.603247, lng: -95.214784 },
-{ retailer: "Kroger", id: "Q00308", address: "13133 Veterans Memorial Dr, Houston, Tx", lat: 29.976878, lng: -95.49144 },
-{ retailer: "Kroger", id: "Q00309", address: "1801 S Voss Rd, Houston, Tx", lat: 29.748605, lng: -95.500223 },
-{ retailer: "Kroger", id: "Q00312", address: "1440 Studemont St, Houston, Tx", lat: 29.773867, lng: -95.389637 },
-{ retailer: "Kroger", id: "Q00389", address: "360 Cypress Creek Pkwy, Houston, Tx", lat: 30.021402, lng: -95.435261 },
-{ retailer: "Kroger", id: "Q00390", address: "1505 Wirt Rd, Houston, Tx", lat: 29.796714, lng: -95.486362 },
-{ retailer: "Kroger", id: "Q00394", address: "10010 Cypresswood Dr, Houston, Tx", lat: 29.982929, lng: -95.56616 },
-{ retailer: "Kroger", id: "Q00395", address: "1520 Eldridge Pkwy, Houston, Tx", lat: 29.75754, lng: -95.627428 },
-{ retailer: "Kroger", id: "Q00396", address: "1035 N Shepherd Dr, Houston, Tx", lat: 29.789327, lng: -95.410978 },
-{ retailer: "Kroger", id: "Q00402", address: "12400 Fm 1960 Rd W, Houston, Tx", lat: 29.923959, lng: -95.604348 },
-{ retailer: "Kroger", id: "Q00405", address: "2300 Gessner Rd, Houston, Tx", lat: 29.81405, lng: -95.544121 },
-{ retailer: "Kroger", id: "Q00406", address: "6322 Telephone Rd, Houston, Tx", lat: 29.674957, lng: -95.290992 },
-{ retailer: "H-E-B", id: "Q00457", address: "12680 W Lake Houston Pkwy, Houston, Tx", lat: 29.923225, lng: -95.197019 },
-{ retailer: "H-E-B", id: "Q00520", address: "10919 Louetta Rd, Houston, Tx", lat: 29.996564, lng: -95.577388 },
-{ retailer: "H-E-B", id: "Q00526", address: "9503 Jones Rd, Houston, Tx", lat: 29.910933, lng: -95.585848 },
-{ retailer: "H-E-B", id: "Q00538", address: "5895 San Felipe St, Houston, Tx", lat: 29.748196, lng: -95.485176 },
-{ retailer: "H-E-B", id: "Q00542", address: "2300 N Shepherd Dr, Houston, Tx", lat: 29.807366, lng: -95.409054 },
-{ retailer: "Randalls", id: "Q00553", address: "3131 W Holcombe Blvd, Houston, Tx", lat: 29.704868, lng: -95.425949 },
-{ retailer: "Kroger", id: "Q00555", address: "14221 E Sam Houston Pkwy N, Houston, Tx", lat: 29.926164, lng: -95.204224 },
-{ retailer: "Kroger", id: "Q00560", address: "3410 Northpark Dr, Houston, Tx", lat: 30.067019, lng: -95.187151 },
-{ retailer: "Randalls", id: "Q00562", address: "2225 Louisiana St, Houston, Tx", lat: 29.748976, lng: -95.374559 },
-{ retailer: "Kroger", id: "Q00565", address: "9330 Jones Rd, Houston, Tx", lat: 29.908635, lng: -95.583638 },
-{ retailer: "Kroger", id: "Q00768", address: "9325 Katy Fwy, Houston, Tx", lat: 29.782105, lng: -95.522284 },
-{ retailer: "Randalls", id: "Q00773", address: "12850 Memorial Dr, Houston, Tx", lat: 29.774031, lng: -95.559927 },
-{ retailer: "Kroger", id: "Q00387", address: "19300 W Lake Houston Pkwy, Humble, Tx", lat: 30.001095, lng: -95.160868 },
-{ retailer: "Kroger", id: "Q00566", address: "9475 Fm 1960 Bypass Rd W, Humble, Tx", lat: 30.004891, lng: -95.283492 },
-{ retailer: "Kroger", id: "Q00296", address: "22150 Westheimer Pkwy, Katy, Tx", lat: 29.734239, lng: -95.754427 },
-{ retailer: "Kroger", id: "Q00313", address: "1712 Spring Green Blvd, Katy, Tx", lat: 29.762908, lng: -95.84394 },
-{ retailer: "Kroger", id: "Q00378", address: "9806 Gaston Rd, Katy, Tx", lat: 29.736088, lng: -95.812751 },
-{ retailer: "Kroger", id: "Q00397", address: "2700 W Grand Pkwy N, Katy, Tx", lat: 29.812541, lng: -95.770183 },
-{ retailer: "H-E-B", id: "Q00535", address: "6711 S Fry Rd, Katy, Tx", lat: 29.71267, lng: -95.775861 },
-{ retailer: "Kroger", id: "Q00757", address: "6055 N Fry Rd, Katy, Tx", lat: 29.860817, lng: -95.720605 },
-{ retailer: "Kroger", id: "Q00905", address: "2061 Rufe Snow Dr, Keller, Tx", lat: 32.897175, lng: -97.237143 },
-{ retailer: "Kroger", id: "Q00381", address: "1300 W Fairmont Pkwy, La Porte, Tx", lat: 29.652709, lng: -95.031951 },
-{ retailer: "Kroger", id: "Q00400", address: "1920 W League City Pkwy, League City, Tx", lat: 29.487975, lng: -95.113581 },
-{ retailer: "Kroger", id: "Q00551", address: "2750 E League City Pkwy, League City, Tx", lat: 29.507706, lng: -95.040903 },
-{ retailer: "Randalls", id: "Q00763", address: "2951 Marina Bay Dr Suite B, League City, Tx", lat: 29.539879, lng: -95.063977 },
-{ retailer: "Albertsons", id: "Q00490", address: "3001 S Central Expy, Mckinney, Tx", lat: 33.171419, lng: -96.636466 },
-{ retailer: "Tom Thumb", id: "Q00904", address: "6800 W Virginia Pkwy, Mckinney, Tx", lat: 33.200444, lng: -96.706456 },
-{ retailer: "Tom Thumb", id: "Q00459", address: "3001 Hardin Blvd, Mckinney, Tx", lat: 33.167176, lng: -96.663264 },
-{ retailer: "Albertsons", id: "Q00482", address: "1500 S Beltline Rd, Mesquite, Tx", lat: 32.745439, lng: -96.59547 },
-{ retailer: "Albertsons", id: "Q00898", address: "2828 Motley Dr, Mesquite, Tx", lat: 32.803487, lng: -96.645653 },
-{ retailer: "Tom Thumb", id: "Q00899", address: "1501 Pioneer Rd, Mesquite, Tx", lat: 32.746042, lng: -96.586101 },
-{ retailer: "Kroger", id: "Q00403", address: "6200 Highway 6, Missouri City, Tx", lat: 29.563658, lng: -95.565486 },
-{ retailer: "Kroger", id: "Q00407", address: "10250 Highway 6, Missouri City, Tx", lat: 29.529634, lng: -95.510762 },
-{ retailer: "Kroger", id: "Q00547", address: "20168 Eva St, Montgomery, Tx", lat: 30.389829, lng: -95.678018 },
-{ retailer: "Kroger", id: "Q00303", address: "22030 Market Place Dr, New Caney, Tx", lat: 30.133118, lng: -95.236656 },
-{ retailer: "WinCo Foods", id: "Q00458", address: "5152 Rufe Snow Drive, North Richland Hills, Tx", lat: 32.843099, lng: -97.23516 },
-{ retailer: "Kroger", id: "Q00290", address: "2619 Red Bluff Rd, Pasadena, Tx", lat: 29.695622, lng: -95.173384 },
-{ retailer: "Kroger", id: "Q00291", address: "3550 Spencer Hwy, Pasadena, Tx", lat: 29.664894, lng: -95.189838 },
-{ retailer: "Kroger", id: "Q00552", address: "6767 Spencer Hwy, Pasadena, Tx", lat: 29.663613, lng: -95.135129 },
-{ retailer: "Kroger", id: "Q00295", address: "3245 Broadway St, Pearland, Tx", lat: 29.560381, lng: -95.271334 },
-{ retailer: "Kroger", id: "Q00301", address: "8323 Broadway St, Pearland, Tx", lat: 29.560587, lng: -95.34892 },
-{ retailer: "Kroger", id: "Q00307", address: "11003 Shadow Creek Pkwy, Pearland, Tx", lat: 29.582969, lng: -95.389765 },
-{ retailer: "H-E-B", id: "Q00466", address: "2805 Business Center Dr, Pearland, Tx", lat: 29.559214, lng: -95.390561 },
-{ retailer: "H-E-B", id: "Q00525", address: "2710 Pearland Pkwy, Pearland, Tx", lat: 29.5582, lng: -95.264988 },
-{ retailer: "Tom Thumb", id: "Q00539", address: "2200 14Th St, Plano, Tx", lat: 33.016631, lng: -96.68341 },
-{ retailer: "Tom Thumb", id: "Q00916", address: "1380 W Campbell Rd, Richardson, Tx", lat: 32.980191, lng: -96.766939 },
-{ retailer: "Tom Thumb", id: "Q00919", address: "3411 Custer Pkwy, Richardson, Tx", lat: 32.999016, lng: -96.730213 },
-{ retailer: "Kroger", id: "Q00304", address: "6425 Fm 1464, Richmond, Tx", lat: 29.708582, lng: -95.687713 },
-{ retailer: "H-E-B", id: "Q00441", address: "10161 W Grand Pkwy S, Richmond, Tx", lat: 29.658292, lng: -95.71325 },
-{ retailer: "Tom Thumb", id: "Q00463", address: "3070 N Goliad St, Rockwall, Tx", lat: 32.964514, lng: -96.462133 },
-{ retailer: "Kroger", id: "Q00567", address: "24401 Brazos Town Crossing, Rosenberg, Tx", lat: 29.543375, lng: -95.751056 },
-{ retailer: "Albertsons", id: "Q00963", address: "1201 N Saginaw Blvd, Saginaw, Tx", lat: 32.880364, lng: -97.381954 },
-{ retailer: "Kroger", id: "Q00393", address: "1905 El Mar Ln, Seabrook, Tx", lat: 29.569198, lng: -95.025562 },
-{ retailer: "Kroger", id: "Q00900", address: "2110 E Southlake Blvd, Southlake, Tx", lat: 32.942639, lng: -97.121965 },
-{ retailer: "Kroger", id: "Q00306", address: "6060 Farm To Market 2920, Spring, Tx", lat: 30.075765, lng: -95.517039 },
-{ retailer: "Kroger", id: "Q00383", address: "3731 Riley Fuzzel Rd, Spring, Tx", lat: 30.118464, lng: -95.381764 },
-{ retailer: "Kroger", id: "Q00404", address: "5671 Treaschwig Rd, Spring, Tx", lat: 30.045561, lng: -95.348157 },
-{ retailer: "H-E-B", id: "Q00533", address: "20311 Champion Forest Dr, Spring, Tx", lat: 30.054196, lng: -95.576635 },
-{ retailer: "H-E-B", id: "Q00544", address: "3540 Rayford Rd, Spring, Tx", lat: 30.108135, lng: -95.387569 },
-{ retailer: "Kroger", id: "Q00545", address: "15802 Champion Forest Dr, Spring, Tx", lat: 30.002978, lng: -95.531675 },
-{ retailer: "Kroger", id: "Q00549", address: "8745 Spring Cypress Rd, Spring, Tx", lat: 30.032725, lng: -95.552759 },
-{ retailer: "Kroger", id: "Q00561", address: "2150 Spring Stuebner Rd, Spring, Tx", lat: 30.083145, lng: -95.442965 },
-{ retailer: "Kroger", id: "Q00564", address: "18518 Kuykendahl Rd, Spring, Tx", lat: 30.039693, lng: -95.487614 },
-{ retailer: "Kroger", id: "Q00568", address: "2301 Rayford Rd, Spring, Tx", lat: 30.124285, lng: -95.407362 },
-{ retailer: "Kroger", id: "Q00292", address: "18861 University Blvd, Sugar Land, Tx", lat: 29.551569, lng: -95.584201 },
-{ retailer: "Kroger", id: "Q00305", address: "11565 S Highway 6, Sugar Land, Tx", lat: 29.648039, lng: -95.649429 },
-{ retailer: "H-E-B", id: "Q00470", address: "530 Highway 6, Sugar Land, Tx", lat: 29.60777, lng: -95.645477 },
-{ retailer: "Kroger", id: "Q00556", address: "4825 Sweetwater Blvd, Sugar Land, Tx", lat: 29.585552, lng: -95.633046 },
-{ retailer: "Kroger", id: "Q00569", address: "3541 Palmer Hwy, Texas City, Tx", lat: 29.395178, lng: -94.949326 },
-{ retailer: "Kroger", id: "Q00288", address: "6700 Woodlands Pkwy, The Woodlands, Tx", lat: 30.182492, lng: -95.535595 },
-{ retailer: "H-E-B", id: "Q00434", address: "9595 Six Pines Dr, The Woodlands, Tx", lat: 30.164333, lng: -95.461511 },
-{ retailer: "H-E-B", id: "Q00536", address: "10777 Kuykendahl Rd, The Woodlands, Tx", lat: 30.179045, lng: -95.538233 },
-{ retailer: "Kroger", id: "Q00559", address: "8000 Research Forest Dr, The Woodlands, Tx", lat: 30.210122, lng: -95.527638 },
-{ retailer: "Kroger", id: "Q00392", address: "24350 Kuykendahl Rd, Tomball, Tx", lat: 30.114611, lng: -95.552664 },
-{ retailer: "Kroger", id: "Q00399", address: "14060 Fm 2920 Rd, Tomball, Tx", lat: 30.091706, lng: -95.634137 },
-{ retailer: "Kroger", id: "Q00550", address: "3135 Fm 528 Rd, Webster, Tx", lat: 29.522206, lng: -95.161795 },
-{ retailer: "Kroger", id: "Q00548", address: "12605 Interstate 45 N, Willis, Tx", lat: 30.422313, lng: -95.494687 }
-      ];
-
-      locations.forEach(location => {
-        const marker = new google.maps.Marker({
-          position: { lat: location.lat, lng: location.lng },
-          map: map,
-          title: location.retailer
-        });
-
-        const infoWindow = new google.maps.InfoWindow({
-          content: `<strong>${location.retailer}</strong><br>
-                    Machine ID: ${location.id}<br>
-                    ${location.address}<br>
-                    <a href="https://www.google.com/maps/dir/?api=1&destination=${location.lat},${location.lng}" target="_blank">
-                      📍 Get Directions</a>`
-        });
-
-        marker.addListener("click", () => {
-          infoWindow.open(map, marker);
-        });
-      });
-    }
-  </script>
+    <meta charset="UTF-8">
+    <title>Pokémon Vending Machines</title>
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4dE-q_PwOeySJOpee-cYXkfi3ewuD6i0"></script>
 </head>
 <body>
-  <h1 style="text-align: center;">Pokémon Vending Machine Locations in Texas</h1>
-  <div id="map"></div>
+    <h1 style="text-align:center;">Pokémon Vending Machine Locations</h1>
+    <div id="map"></div>
+    <script>
+        const locations = [
+    { retailer: "Unknown", id: "Unknown", address: "14280 Marsh Ln, Addison, TX, TX", lat: 32.938485, lng: -96.853651 },
+    { retailer: "Unknown", id: "Unknown", address: "3770 Belt Line Rd, Addison, TX, TX", lat: 32.952024, lng: -96.852339 },
+    { retailer: "Unknown", id: "Unknown", address: "1212 E Bethany Dr, Allen, TX, TX", lat: 33.083529, lng: -96.64441 },
+    { retailer: "Unknown", id: "Unknown", address: "1210 N Greenville Ave, Allen, TX, TX", lat: 33.116056, lng: -96.650574 },
+    { retailer: "Unknown", id: "Unknown", address: "3100 S Gordon St, Alvin, TX, TX", lat: 29.398478, lng: -95.24898 },
+    { retailer: "Unknown", id: "Unknown", address: "2755 N Collins St, Arlington, TX, TX", lat: 32.78415, lng: -97.094892 },
+    { retailer: "Unknown", id: "Unknown", address: "480 Northwest Pkwy, Azle, TX, TX", lat: 32.902011, lng: -97.544408 },
+    { retailer: "Unknown", id: "Unknown", address: "1700 N Alexander Dr, Baytown, TX, TX", lat: 29.740173, lng: -94.952331 },
+    { retailer: "Unknown", id: "Unknown", address: "5106 Bissonnet St, Bellaire, TX, TX", lat: 29.70758, lng: -95.469048 },
+    { retailer: "Unknown", id: "Unknown", address: "833 NE Alsbury Blvd, Burleson, TX, TX", lat: 32.564632, lng: -97.321899 },
+    { retailer: "Unknown", id: "Unknown", address: "2620 N. Josey Lane, Carrollton, TX, TX", lat: 32.98686, lng: -96.889525 },
+    { retailer: "Unknown", id: "Unknown", address: "2150 N Josey Ln, Carrollton, TX, TX", lat: 32.974802, lng: -96.888337 },
+    { retailer: "Unknown", id: "Unknown", address: "2222 Interstate 45 N, Conroe, TX, TX", lat: 30.336151, lng: -95.477058 },
+    { retailer: "Unknown", id: "Unknown", address: "341 S Loop 336 W, Conroe, TX, TX", lat: 30.276486, lng: -95.464877 },
+    { retailer: "Unknown", id: "Unknown", address: "106 N Denton Tap Rd, Coppell, TX, TX", lat: 32.971181, lng: -96.992422 },
+    { retailer: "Unknown", id: "Unknown", address: "4351 FM 2181, Corinth, TX, TX", lat: 33.131131, lng: -97.043412 },
+    { retailer: "Unknown", id: "Unknown", address: "14100 Spring Cypress Rd, Cypress, TX, TX", lat: 30.003158, lng: -95.637149 },
+    { retailer: "Unknown", id: "Unknown", address: "9722 Fry Rd, Cypress, TX, TX", lat: 29.928932, lng: -95.726769 },
+    { retailer: "Unknown", id: "Unknown", address: "24224 Northwest Fwy, Cypress, TX, TX", lat: 29.95749, lng: -95.673224 },
+    { retailer: "Unknown", id: "Unknown", address: "9703 Barker Cypress Rd, Cypress, TX, TX", lat: 29.918995, lng: -95.688652 },
+    { retailer: "Unknown", id: "Unknown", address: "17455 Spring Cypress Rd, Cypress, TX, TX", lat: 29.971353, lng: -95.690792 },
+    { retailer: "Unknown", id: "Unknown", address: "20355 Cypresswood Dr, Cypress, TX, TX", lat: 29.98808, lng: -95.731519 },
+    { retailer: "Unknown", id: "Unknown", address: "4625 Frankford Rd, Dallas, TX, TX", lat: 32.99917, lng: -96.827129 },
+    { retailer: "Unknown", id: "Unknown", address: "3757 Forest Ln, Dallas, TX, TX", lat: 32.910924, lng: -96.853033 },
+    { retailer: "Unknown", id: "Unknown", address: "5809 E Lovers Ln, Dallas, TX, TX", lat: 32.852206, lng: -96.767169 },
+    { retailer: "Unknown", id: "Unknown", address: "17194 Preston Rd, Dallas, TX, TX", lat: 32.983901, lng: -96.802202 },
+    { retailer: "Unknown", id: "Unknown", address: "1592 S Loop 288, Denton, TX, TX", lat: 33.194008, lng: -97.095134 },
+    { retailer: "Unknown", id: "Unknown", address: "633 W Wheatland Rd, Duncanville, TX, TX", lat: 32.648449, lng: -96.923408 },
+    { retailer: "Unknown", id: "Unknown", address: "745 Cross Timbers Rd, Flower Mound, TX, TX", lat: 33.041519, lng: -97.039155 },
+    { retailer: "Unknown", id: "Unknown", address: "1101 Flower Mound Rd, Flower Mound, TX, TX", lat: 33.009917, lng: -97.046672 },
+    { retailer: "Unknown", id: "Unknown", address: "2709 Cross Timbers Rd, Flower Mound, TX, TX", lat: 33.035163, lng: -97.071916 },
+    { retailer: "Unknown", id: "Unknown", address: "9300 Clifford St, Fort Worth, TX, TX", lat: 32.766846, lng: -97.478814 },
+    { retailer: "Unknown", id: "Unknown", address: "8000 Crowley Rd, Fort Worth, TX, TX", lat: 32.632876, lng: -97.349629 },
+    { retailer: "Unknown", id: "Unknown", address: "3100 S Hulen St, Fort Worth, TX, TX", lat: 32.704965, lng: -97.389386 },
+    { retailer: "Unknown", id: "Unknown", address: "850 E Loop 820, Fort Worth, TX, TX", lat: 32.767425, lng: -97.214585 },
+    { retailer: "Unknown", id: "Unknown", address: "5241 N Tarrant Pkwy, Fort Worth, TX, TX", lat: 32.89592, lng: -97.270332 },
+    { retailer: "Unknown", id: "Unknown", address: "1653 Basswood Blvd, Fort Worth, TX, TX", lat: 32.872188, lng: -97.339485 },
+    { retailer: "Unknown", id: "Unknown", address: "151 N Friendswood Dr, Friendswood, TX, TX", lat: 29.535493, lng: -95.205967 },
+    { retailer: "Unknown", id: "Unknown", address: "5730 Seawall Blvd, Galveston, TX, TX", lat: 29.26873, lng: -94.822865 },
+    { retailer: "Unknown", id: "Unknown", address: "1122 W Centerville Rd, Garland, TX, TX", lat: 32.855114, lng: -96.644251 },
+    { retailer: "Unknown", id: "Unknown", address: "532 W Interstate 30, Garland, TX, TX", lat: 32.83783, lng: -96.59692 },
+    { retailer: "Unknown", id: "Unknown", address: "4215 S Carrier Pkwy, Grand Prairie, TX, TX", lat: 32.670984, lng: -97.00463 },
+    { retailer: "Unknown", id: "Unknown", address: "10306 S Post Oak Rd, Houston, TX, TX", lat: 29.669378, lng: -95.463639 },
+    { retailer: "Unknown", id: "Unknown", address: "12434 State Highway 249, Houston, TX, TX", lat: 29.91221, lng: -95.477897 },
+    { retailer: "Unknown", id: "Unknown", address: "9919 Westheimer Rd, Houston, TX, TX", lat: 29.736457, lng: -95.544677 },
+    { retailer: "Unknown", id: "Unknown", address: "16400 El Camino Real, Houston, TX, TX", lat: 29.558554, lng: -95.124676 },
+    { retailer: "Unknown", id: "Unknown", address: "11701 E Sam Houston Pkwy S, Houston, TX, TX", lat: 29.603247, lng: -95.214784 },
+    { retailer: "Unknown", id: "Unknown", address: "13133 Veterans Memorial Dr, Houston, TX, TX", lat: 29.976878, lng: -95.49144 },
+    { retailer: "Unknown", id: "Unknown", address: "1801 S Voss Rd, Houston, TX, TX", lat: 29.748605, lng: -95.500223 },
+    { retailer: "Unknown", id: "Unknown", address: "1440 Studemont St, Houston, TX, TX", lat: 29.773867, lng: -95.389637 },
+    { retailer: "Unknown", id: "Unknown", address: "360 Cypress Creek Pkwy, Houston, TX, TX", lat: 30.021402, lng: -95.435261 },
+    { retailer: "Unknown", id: "Unknown", address: "1505 Wirt Rd, Houston, TX, TX", lat: 29.796714, lng: -95.486362 },
+    { retailer: "Unknown", id: "Unknown", address: "10010 Cypresswood Dr, Houston, TX, TX", lat: 29.982929, lng: -95.56616 },
+    { retailer: "Unknown", id: "Unknown", address: "1520 Eldridge Pkwy, Houston, TX, TX", lat: 29.75754, lng: -95.627428 },
+    { retailer: "Unknown", id: "Unknown", address: "1035 N Shepherd Dr, Houston, TX, TX", lat: 29.789327, lng: -95.410978 },
+    { retailer: "Unknown", id: "Unknown", address: "12400 FM 1960 Rd W, Houston, TX, TX", lat: 29.923959, lng: -95.604348 },
+    { retailer: "Unknown", id: "Unknown", address: "2300 Gessner Rd, Houston, TX, TX", lat: 29.81405, lng: -95.544121 },
+    { retailer: "Unknown", id: "Unknown", address: "6322 Telephone Rd, Houston, TX, TX", lat: 29.674957, lng: -95.290992 },
+    { retailer: "Unknown", id: "Unknown", address: "12680 W Lake Houston Pkwy, Houston, TX, TX", lat: 29.923225, lng: -95.197019 },
+    { retailer: "Unknown", id: "Unknown", address: "10919 Louetta Rd, Houston, TX, TX", lat: 29.996564, lng: -95.577388 },
+    { retailer: "Unknown", id: "Unknown", address: "9503 Jones Rd, Houston, TX, TX", lat: 29.910933, lng: -95.585848 },
+    { retailer: "Unknown", id: "Unknown", address: "5895 San Felipe St, Houston, TX, TX", lat: 29.748196, lng: -95.485176 },
+    { retailer: "Unknown", id: "Unknown", address: "2300 N Shepherd Dr, Houston, TX, TX", lat: 29.807366, lng: -95.409054 },
+    { retailer: "Unknown", id: "Unknown", address: "3131 W Holcombe Blvd, Houston, TX, TX", lat: 29.704868, lng: -95.425949 },
+    { retailer: "Unknown", id: "Unknown", address: "14221 E Sam Houston Pkwy N, Houston, TX, TX", lat: 29.926164, lng: -95.204224 },
+    { retailer: "Unknown", id: "Unknown", address: "3410 Northpark Dr, Houston, TX, TX", lat: 30.067019, lng: -95.187151 },
+    { retailer: "Unknown", id: "Unknown", address: "2225 Louisiana St, Houston, TX, TX", lat: 29.748976, lng: -95.374559 },
+    { retailer: "Unknown", id: "Unknown", address: "9330 Jones Rd, Houston, TX, TX", lat: 29.908635, lng: -95.583638 },
+    { retailer: "Unknown", id: "Unknown", address: "9325 Katy Fwy, Houston, TX, TX", lat: 29.782105, lng: -95.522284 },
+    { retailer: "Unknown", id: "Unknown", address: "12850 Memorial Dr, Houston, TX, TX", lat: 29.774031, lng: -95.559927 },
+    { retailer: "Unknown", id: "Unknown", address: "19300 W Lake Houston Pkwy, Humble, TX, TX", lat: 30.001095, lng: -95.160868 },
+    { retailer: "Unknown", id: "Unknown", address: "9475 FM 1960 Bypass Rd W, Humble, TX, TX", lat: 30.004891, lng: -95.283492 },
+    { retailer: "Unknown", id: "Unknown", address: "22150 Westheimer Pkwy, Katy, TX, TX", lat: 29.734239, lng: -95.754427 },
+    { retailer: "Unknown", id: "Unknown", address: "1712 Spring Green Blvd, Katy, TX, TX", lat: 29.762908, lng: -95.84394 },
+    { retailer: "Unknown", id: "Unknown", address: "9806 Gaston Rd, Katy, TX, TX", lat: 29.736088, lng: -95.812751 },
+    { retailer: "Unknown", id: "Unknown", address: "2700 W Grand Pkwy N, Katy, TX, TX", lat: 29.812541, lng: -95.770183 },
+    { retailer: "Unknown", id: "Unknown", address: "6711 S Fry Rd, Katy, TX, TX", lat: 29.71267, lng: -95.775861 },
+    { retailer: "Unknown", id: "Unknown", address: "6055 N Fry Rd, Katy, TX, TX", lat: 29.860817, lng: -95.720605 },
+    { retailer: "Unknown", id: "Unknown", address: "2061 Rufe Snow Dr, Keller, TX, TX", lat: 32.897175, lng: -97.237143 },
+    { retailer: "Unknown", id: "Unknown", address: "1300 W Fairmont Pkwy, La Porte, TX, TX", lat: 29.652709, lng: -95.031951 },
+    { retailer: "Unknown", id: "Unknown", address: "1920 W League City Pkwy, League City, TX, TX", lat: 29.487975, lng: -95.113581 },
+    { retailer: "Unknown", id: "Unknown", address: "2750 E League City Pkwy, League City, TX, TX", lat: 29.507706, lng: -95.040903 },
+    { retailer: "Unknown", id: "Unknown", address: "2951 Marina Bay Dr Suite B, League City, TX, TX", lat: 29.539879, lng: -95.063977 },
+    { retailer: "Unknown", id: "Unknown", address: "3001 S Central Expy, McKinney, TX, TX", lat: 33.171419, lng: -96.636466 },
+    { retailer: "Unknown", id: "Unknown", address: "6800 W Virginia Pkwy, McKinney, TX, TX", lat: 33.200444, lng: -96.706456 },
+    { retailer: "Unknown", id: "Unknown", address: "3001 Hardin Blvd, Mckinney, TX, TX", lat: 33.167176, lng: -96.663264 },
+    { retailer: "Unknown", id: "Unknown", address: "1500 S Beltline Rd, Mesquite, TX, TX", lat: 32.745439, lng: -96.59547 },
+    { retailer: "Unknown", id: "Unknown", address: "2828 Motley Dr, Mesquite, TX, TX", lat: 32.803487, lng: -96.645653 },
+    { retailer: "Unknown", id: "Unknown", address: "1501 Pioneer Rd, Mesquite, TX, TX", lat: 32.746042, lng: -96.586101 },
+    { retailer: "Unknown", id: "Unknown", address: "6200 Highway 6, Missouri City, TX, TX", lat: 29.563658, lng: -95.565486 },
+    { retailer: "Unknown", id: "Unknown", address: "10250 Highway 6, Missouri City, TX, TX", lat: 29.529634, lng: -95.510762 },
+    { retailer: "Unknown", id: "Unknown", address: "20168 Eva St, Montgomery, TX, TX", lat: 30.389829, lng: -95.678018 },
+    { retailer: "Unknown", id: "Unknown", address: "22030 Market Place Dr, New Caney, TX, TX", lat: 30.133118, lng: -95.236656 },
+    { retailer: "Unknown", id: "Unknown", address: "5152 Rufe Snow Drive, North Richland Hills, TX, TX", lat: 32.843099, lng: -97.23516 },
+    { retailer: "Unknown", id: "Unknown", address: "2619 Red Bluff Rd, Pasadena, TX, TX", lat: 29.695622, lng: -95.173384 },
+    { retailer: "Unknown", id: "Unknown", address: "3550 Spencer Hwy, Pasadena, TX, TX", lat: 29.664894, lng: -95.189838 },
+    { retailer: "Unknown", id: "Unknown", address: "6767 Spencer Hwy, Pasadena, TX, TX", lat: 29.663613, lng: -95.135129 },
+    { retailer: "Unknown", id: "Unknown", address: "3245 Broadway St, Pearland, TX, TX", lat: 29.560381, lng: -95.271334 },
+    { retailer: "Unknown", id: "Unknown", address: "8323 Broadway St, Pearland, TX, TX", lat: 29.560587, lng: -95.34892 },
+    { retailer: "Unknown", id: "Unknown", address: "11003 Shadow Creek Pkwy, Pearland, TX, TX", lat: 29.582969, lng: -95.389765 },
+    { retailer: "Unknown", id: "Unknown", address: "2805 Business Center Dr, Pearland, TX, TX", lat: 29.559214, lng: -95.390561 },
+    { retailer: "Unknown", id: "Unknown", address: "2710 Pearland Pkwy, Pearland, TX, TX", lat: 29.5582, lng: -95.264988 },
+    { retailer: "Unknown", id: "Unknown", address: "2200 14th St, Plano, TX, TX", lat: 33.016631, lng: -96.68341 },
+    { retailer: "Unknown", id: "Unknown", address: "1380 W Campbell Rd, Richardson, TX, TX", lat: 32.980191, lng: -96.766939 },
+    { retailer: "Unknown", id: "Unknown", address: "3411 Custer Pkwy, Richardson, TX, TX", lat: 32.999016, lng: -96.730213 },
+    { retailer: "Unknown", id: "Unknown", address: "6425 Fm 1464, Richmond, TX, TX", lat: 29.708582, lng: -95.687713 },
+    { retailer: "Unknown", id: "Unknown", address: "10161 W Grand Pkwy S, Richmond, TX, TX", lat: 29.658292, lng: -95.71325 },
+    { retailer: "Unknown", id: "Unknown", address: "3070 N Goliad St, Rockwall, TX, TX", lat: 32.964514, lng: -96.462133 },
+    { retailer: "Unknown", id: "Unknown", address: "24401 Brazos Town Crossing, Rosenberg, TX, TX", lat: 29.543375, lng: -95.751056 },
+    { retailer: "Unknown", id: "Unknown", address: "1201 N Saginaw Blvd, Saginaw, TX, TX", lat: 32.880364, lng: -97.381954 },
+    { retailer: "Unknown", id: "Unknown", address: "1905 El Mar Ln, Seabrook, TX, TX", lat: 29.569198, lng: -95.025562 },
+    { retailer: "Unknown", id: "Unknown", address: "2110 E Southlake Blvd, Southlake, TX, TX", lat: 32.942639, lng: -97.121965 },
+    { retailer: "Unknown", id: "Unknown", address: "6060 Farm To Market 2920, Spring, TX, TX", lat: 30.075765, lng: -95.517039 },
+    { retailer: "Unknown", id: "Unknown", address: "3731 Riley Fuzzel Rd, Spring, TX, TX", lat: 30.118464, lng: -95.381764 },
+    { retailer: "Unknown", id: "Unknown", address: "5671 Treaschwig Rd, Spring, TX, TX", lat: 30.045561, lng: -95.348157 },
+    { retailer: "Unknown", id: "Unknown", address: "20311 Champion Forest Dr, Spring, TX, TX", lat: 30.054196, lng: -95.576635 },
+    { retailer: "Unknown", id: "Unknown", address: "3540 Rayford Rd, Spring, TX, TX", lat: 30.108135, lng: -95.387569 },
+    { retailer: "Unknown", id: "Unknown", address: "15802 Champion Forest Dr, Spring, TX, TX", lat: 30.002978, lng: -95.531675 },
+    { retailer: "Unknown", id: "Unknown", address: "8745 Spring Cypress Rd, Spring, TX, TX", lat: 30.032725, lng: -95.552759 },
+    { retailer: "Unknown", id: "Unknown", address: "2150 Spring Stuebner Rd, Spring, TX, TX", lat: 30.083145, lng: -95.442965 },
+    { retailer: "Unknown", id: "Unknown", address: "18518 Kuykendahl Rd, Spring, TX, TX", lat: 30.039693, lng: -95.487614 },
+    { retailer: "Unknown", id: "Unknown", address: "2301 Rayford Rd, Spring, TX, TX", lat: 30.124285, lng: -95.407362 },
+    { retailer: "Unknown", id: "Unknown", address: "18861 University Blvd, Sugar Land, TX, TX", lat: 29.551569, lng: -95.584201 },
+    { retailer: "Unknown", id: "Unknown", address: "11565 S Highway 6, Sugar Land, TX, TX", lat: 29.648039, lng: -95.649429 },
+    { retailer: "Unknown", id: "Unknown", address: "530 Highway 6, Sugar Land, TX, TX", lat: 29.60777, lng: -95.645477 },
+    { retailer: "Unknown", id: "Unknown", address: "4825 Sweetwater Blvd, Sugar Land, TX, TX", lat: 29.585552, lng: -95.633046 },
+    { retailer: "Unknown", id: "Unknown", address: "3541 Palmer Hwy, Texas City, TX, TX", lat: 29.395178, lng: -94.949326 },
+    { retailer: "Unknown", id: "Unknown", address: "6700 Woodlands Pkwy, The Woodlands, TX, TX", lat: 30.182492, lng: -95.535595 },
+    { retailer: "Unknown", id: "Unknown", address: "9595 Six Pines Dr, The Woodlands, TX, TX", lat: 30.164333, lng: -95.461511 },
+    { retailer: "Unknown", id: "Unknown", address: "10777 Kuykendahl Rd, The Woodlands, TX, TX", lat: 30.179045, lng: -95.538233 },
+    { retailer: "Unknown", id: "Unknown", address: "8000 Research Forest Dr, The Woodlands, TX, TX", lat: 30.210122, lng: -95.527638 },
+    { retailer: "Unknown", id: "Unknown", address: "24350 Kuykendahl Rd, Tomball, TX, TX", lat: 30.114611, lng: -95.552664 },
+    { retailer: "Unknown", id: "Unknown", address: "14060 FM 2920 Rd, Tomball, TX, TX", lat: 30.091706, lng: -95.634137 },
+    { retailer: "Unknown", id: "Unknown", address: "3135 FM 528 Rd, Webster, TX, TX", lat: 29.522206, lng: -95.161795 },
+    { retailer: "Unknown", id: "Unknown", address: "12605 Interstate 45 N, Willis, TX, TX", lat: 30.422313, lng: -95.494687 },
+];
+
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 8,
+                center: { lat: 29.7604, lng: -95.3698 },
+            });
+
+            // Add user location if available
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        new google.maps.Marker({
+                            position: userLocation,
+                            map: map,
+                            title: "You are here",
+                            icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                        });
+                        map.setCenter(userLocation);
+                        map.setZoom(11);
+                    },
+                    () => console.warn("Geolocation permission denied.")
+                );
+            }
+
+            locations.forEach(loc => {
+                const marker = new google.maps.Marker({
+                    position: { lat: loc.lat, lng: loc.lng },
+                    map: map,
+                    title: loc.retailer
+                });
+                const infoWindow = new google.maps.InfoWindow({
+                    content: `<strong>\${loc.retailer}</strong><br>ID: \${loc.id}<br>\${loc.address}`
+                });
+                marker.addListener("click", () => infoWindow.open(map, marker));
+            });
+        }
+
+        window.onload = initMap;
+    </script>
 </body>
 </html>
