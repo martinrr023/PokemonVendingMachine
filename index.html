@@ -11,28 +11,15 @@
   </style>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4dE-q_PwOeySJOpee-cYXkfi3ewuD6i0&callback=initMap" async defer></script>
   <script>
-    let map; // Declare map globally
-  
+    let map;
     function initMap() {
-      map = new google.maps.Map(document.getElementById("map"), {
+      const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 8,
         center: { lat: 29.7604, lng: -95.3698 },
         mapTypeControl: true,
         streetViewControl: false,
         fullscreenControl: true
       });
-  
-      // ... your marker code here ...
-    }
-  
-    // ✅ Add the zoom functions below initMap()
-    function zoomIn() {
-      map.setZoom(map.getZoom() + 1);
-    }
-  
-    function zoomOut() {
-      map.setZoom(map.getZoom() - 1);
-    }
 
       const locations = [
         { retailer: "Tom Thumb", id: "Q00912", address: "14280 Marsh Ln, Addison, Tx", lat: 32.938485, lng: -96.853651 },
@@ -191,7 +178,15 @@
           infoWindow.open(map, marker);
         });
       });
-    
+    }
+    function zoomIn() {
+    map.setZoom(map.getZoom() + 1);
+  }
+
+  function zoomOut() {
+    map.setZoom(map.getZoom() - 1);
+  }
+</script>
 </script>
 </head>
 
