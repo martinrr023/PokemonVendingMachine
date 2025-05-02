@@ -1,19 +1,17 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokémon Vending Machine Locations</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4dE-q_PwOeySJOpee-cYXkfi3ewuD6i0&callback=initMap" async defer></script>
     <script>
-        function initMap() {
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 8,
-                center: { lat: 29.749907, lng: -95.358421 }, // Centering on Texas
-            });
-            
-            
-            const locations = [
+    function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 7,
+            center: { lat: 31.0, lng: -97.0 }
+        });
+
+        const locations = [
 { address: "14280 Marsh Ln, Addison, TX", lat: 32.938485, lng: -96.853651 },
 { address: "3770 Belt Line Rd, Addison, TX", lat: 32.952024, lng: -96.852339 },
 { address: "1212 E Bethany Dr, Allen, TX", lat: 33.083529, lng: -96.64441 },
@@ -151,32 +149,24 @@
 { address: "12605 Interstate 45 N, Willis, TX", lat: 30.422313, lng: -95.494687 }
 ];
 
-                
-                // Add more locations as needed
-
-
-            locations.forEach((location) => {
-                const marker = new google.maps.Marker({
+        locations.forEach(location => {
+            const marker = new google.maps.Marker({
                 position: { lat: location.lat, lng: location.lng },
                 map: map,
-                title: location.retailer
+                title: location.address
             });
 
             const infoWindow = new google.maps.InfoWindow({
-                content: `<strong>${location.retailer}</strong><br>
-                  Machine ID: ${location.id}<br>
-                  ${location.address}<br>
-                  <a href="https://www.google.com/maps/dir/?api=1&destination=${location.lat},${location.lng}" 
-                     target="_blank" style="color: blue; text-decoration: underline;">
-                      📍 Get Directions
-                  </a>`
+                content: `<strong>Location</strong><br>{
+                    location.address
+                }<br><a href='https://www.google.com/maps/search/?api=1&query={location.lat},{location.lng}' target='_blank'>Get Directions</a>`
             });
 
-             marker.addListener("click", () => {
+            marker.addListener("click", () => {
                 infoWindow.open(map, marker);
-         });
-});
-        }
+            });
+        });
+    }
     </script>
     <style>
         #map {
@@ -186,8 +176,7 @@
     </style>
 </head>
 <body>
-    <h1 style="text-align: center;">Pokémon Vending Machine Locations in Texas</h1>
+    <h2 style="text-align:center;">Pokémon Vending Machine Locations in Texas</h2>
     <div id="map"></div>
 </body>
 </html>
-
